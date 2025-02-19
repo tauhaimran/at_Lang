@@ -11,7 +11,7 @@ public class regex { //regular expression class
     public static final String CHAR = "'.'";
     public static final String STR = "\"([^\"\\\\]|\\\\.)*\"";  
     public static final String VAR = "[a-z]+";  
-    //public static final String DTYPE = "(INT|DEC|BOOL|CHAR|STR)";  
+    public static final String DTYPE = "(INT|DEC|BOOL|CHAR|STR)";  
 
     // Atomic Expressions (Includes Parentheses)
     public static final String ATOMIC_EXPR = "\\(*(" + INT + "|" + DEC + "|" + VAR + ")\\)*";  

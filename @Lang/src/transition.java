@@ -1,7 +1,7 @@
 // Compiler Construction Assignment #1
 // 22i-???? Husain Ali Zaidi
 // 22i-1239 Tauha Imran
-class Transition {
+public class Transition {
     char symbol;
     state nextState;
 
