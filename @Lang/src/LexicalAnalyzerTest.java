@@ -15,5 +15,10 @@ public class LexicalAnalyzerTest {
         for (Token token : tokens) {
             System.out.println(token);
         }
+    
+         // Print the symbol table
+         SymbolTable symbolTable = analyzer.getSymbolTable();
+         System.out.println("Symbol Table:");
+         System.out.println(symbolTable);
 }
 }
