@@ -1,31 +1,26 @@
-import java.util.HashSet;
-import java.util.Set;
-// Compiler Construction Assignment #1
-// 22i-???? Husain Ali Zaidi
-// 22i-1239 Tauha Imran
-public class state {
+import java.util.*;
+
+public class State {
     int id;
     boolean isFinal;
-    Set<Transition> transitions;
+    Map<Character, Set<State>> transitions;
 
-    public state(int id, boolean isFinal) {
+    public State(int id, boolean isFinal) {
         this.id = id;
         this.isFinal = isFinal;
-        this.transitions = new HashSet<>();
+        this.transitions = new HashMap<>();
     }
 
-    public void addTransition(char symbol, state nextstate) {
-        transitions.add(new Transition(symbol, nextstate));
+    public void addTransition(char symbol, State nextState) {
+        transitions.computeIfAbsent(symbol, k -> new HashSet<>()).add(nextState);
     }
 
-    public Set<state> getNextStates(char symbol) {
-        Set<state> nextstates = new HashSet<>();
-        for (Transition transition : transitions) {
-            if (transition.symbol == symbol || transition.symbol == 'ε') {
-                nextstates.add(transition.nextState);
-            }
-        }
-        return nextstates;
+    public Set<State> getNextStates(char symbol) {
+        return transitions.getOrDefault(symbol, new HashSet<>());
+    }
+
+    @Override
+    public String toString() {
+        return "State[id=" + id + ", isFinal=" + isFinal + "]";
     }
 }
-

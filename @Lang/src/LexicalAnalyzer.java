@@ -64,6 +64,7 @@ class LexicalAnalyzer {
         return tokens;
     }
 
+
     public SymbolTable getSymbolTable() {
         return symbolTable;
     }

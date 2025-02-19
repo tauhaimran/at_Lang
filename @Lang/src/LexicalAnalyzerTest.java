@@ -10,7 +10,6 @@ public class LexicalAnalyzerTest {
 
         // Analyze the source code
         List<Token> tokens = analyzer.analyze(sourceCode);
-
         // Print the tokens
         for (Token token : tokens) {
             System.out.println(token);
@@ -20,5 +19,6 @@ public class LexicalAnalyzerTest {
          SymbolTable symbolTable = analyzer.getSymbolTable();
          System.out.println("Symbol Table:");
          System.out.println(symbolTable);
+    
 }
 }
