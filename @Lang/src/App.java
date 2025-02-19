@@ -13,19 +13,18 @@ public class App {
                nfa.addTransition(end, c, end);
            }
    
-            nfa.displayStateInfo();
+        nfa.displayStateInfo();
            nfa.displayTransitionTable();
    
            // Test the NFA
            System.out.println("NFA accepts 'abc': " + nfa.accept("abc")); // Should return true
            System.out.println("NFA accepts '123': " + nfa.accept("123")); // Should return false
    
-           // Convert NFA to DFA (simplified)
-           //dfa dfa = new dfa(nfa);
-   //
-           //// Test the DFA
-           //System.out.println("DFA accepts 'abc': " + dfa.accept("abc")); // Should return true
-           //System.out.println("DFA accepts '123': " + dfa.accept("123")); // Should return false
-   
-    }
+       // Convert NFA to DFA (simplified)
+       dfa dfa = new dfa(nfa);
+
+       // Test the DFA
+       System.out.println("DFA accepts 'abc': " + dfa.accept("abc")); // Should return true
+       System.out.println("DFA accepts '123': " + dfa.accept("123")); // Should return false
+        }
 }
