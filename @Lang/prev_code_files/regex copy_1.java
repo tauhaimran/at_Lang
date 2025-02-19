@@ -43,11 +43,7 @@ public class regex { //regular expression class
         return matcher.matches();
     }
 
-    
-//   public static void main(String[] args) {
-//             // Integer test
-//             System.out.println("INT Validation (42): " + validate("42", Pattern.compile(INT)));
-//   }
+
  //   public static void main(String[] args) {
  //       // Integer test
  //       System.out.println("INT Validation (42): " + validate("42", Pattern.compile(INT)));
