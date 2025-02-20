@@ -1,20 +1,32 @@
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class SymbolTable {
-    private final Map<String, String> symbols = new HashMap<>();
+    private Map<String, Token> table;
 
-    void add(String lexeme, String type) {
-        symbols.put(lexeme, type);
+    public SymbolTable() {
+        this.table = new HashMap<>();
     }
 
-    String get(String lexeme) {
-        return symbols.get(lexeme);
+    // Add a token to the symbol table
+    public void addToken(Token token) {
+        table.put(token.lexeme, token);
     }
 
-    @Override
-    public String toString() {
-        return symbols.toString();
+    // Check if a token exists in the symbol table
+    public boolean contains(String lexeme) {
+        return table.containsKey(lexeme);
+    }
+
+    // Get a token from the symbol table
+    public Token getToken(String lexeme) {
+        return table.get(lexeme);
+    }
+
+    // Display the symbol table
+    public void displaySymbolTable() {
+        System.out.println("Symbol Table:");
+        for (Map.Entry<String, Token> entry : table.entrySet()) {
+            System.out.println(entry.getKey() + " -> " + entry.getValue());
+        }
     }
 }
-

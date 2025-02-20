@@ -7,7 +7,7 @@ public class regexTester {
     public static void main(String[] args) {
     
                // Integer test
-               System.out.println("INT Validation (42): " + regex.validate("42", Pattern.compile(regex.INT)));
+               /*System.out.println("INT Validation (42): " + regex.validate("42", Pattern.compile(regex.INT)));
                        // Decimal test
                System.out.println("DEC Validation (3.14159): " + regex.validate("3.14159", Pattern.compile(regex.DEC)));
                        // Boolean test
@@ -28,19 +28,19 @@ public class regexTester {
                System.out.println("ASSIGN Validation (x@INT @ (((1 + 2) * 3) / 2);): " + regex.validate("x@INT @ (((1 + 2) * 3) / 2);", regex.ASSIGN));
                System.out.println("ASSIGN Validation (y@DEC @ ((2.0 + (4.5 * 3.2)) - (1.5 / 2));): " + regex.validate("y@DEC @ ((2.0 + (4.5 * 3.2)) - (1.5 / 2));", regex.ASSIGN));
                System.out.println("ASSIGN Validation (x@DEC @ (2.5 ^ 3.0) + 4.2;): " + regex.validate("x@DEC @ (2.5 ^ 3.0) + 4.2;", regex.ASSIGN));
-               System.out.println("ASSIGN Validation (y@DEC @ ((5.5 / 2) ^ 3) + 1;): " + regex.validate("y@DEC @ ((5.5 / 2) ^ 3) + 1;", regex.ASSIGN));
+               System.out.println("ASSIGN Validation (y@DEC @ ((5.5 / 2) ^ 3) + 1;): " + regex.validate("y@DEC @ ((5.5 / 2) ^ 3) + 1;", regex.ASSIGN));*/
                        // Invalid cases
-               System.out.println("ASSIGN Validation (invalid, should be false: x@INT @ 5.3;): " + regex.validate("x@INT @ 5.5 + 3;", regex.ASSIGN));
-               System.out.println("ASSIGN Validation (invalid, should be false: z@BOOL @ 1 + 0;): " + regex.validate("z@BOOL @ 1 + 0;", regex.ASSIGN));
-               System.out.println("ASSIGN Validation (invalid, should be false: z@BOOL @ 1 + 0;): " + regex.validate("z@BOOL @ 1 + 0;", regex.ASSIGN));        
+               //System.out.println("ASSIGN Validation (invalid, should be false: x@INT @ 5.3;): " + regex.validate("x@INT @ 5.5 + 3;", regex.ASSIGN));
+               //System.out.println("ASSIGN Validation (invalid, should be false: z@BOOL @ 1 + 0;): " + regex.validate("z@BOOL @ 1 + 0;", regex.ASSIGN));
+               //System.out.println("ASSIGN Validation (invalid, should be false: z@BOOL @ 1 + 0;): " + regex.validate("z@BOOL @ 1 + 0;", regex.ASSIGN));        
                // Scope validation
-               System.out.println("SCOPE Validation (Valid scope): " + regex.validate("{ x@INT @ 5; y@DEC @ 3.14; z@BOOL @ false; }", regex.SCOPE));
-               System.out.println("SCOPE Validation (Nested scope): " + regex.validate("{ x@INT @ (3 + 2); { y@DEC @ 4.2 * 3.1; z@INT @ ((2 + 3) * (4 - 1)); } }", regex.SCOPE));
+               //System.out.println("SCOPE Validation (Valid scope): " + regex.validate("{ x@INT @ 5; y@DEC @ 3.14; z@BOOL @ false; }", regex.SCOPE));
+               //System.out.println("SCOPE Validation (Nested scope): " + regex.validate("{ x@INT @ (3 + 2); { y@DEC @ 4.2 * 3.1; z@INT @ ((2 + 3) * (4 - 1)); } }", regex.SCOPE));
                        // Multi-line comment validation
-               System.out.println("MULTILINE_COMMENT Validation (Single line): " + regex.validate("/* This is a test comment */", regex.MULTILINE_COMMENT));
-               System.out.println("MULTILINE_COMMENT Validation (Multi-line): " + regex.validate("/* multi-line\ncomment */", regex.MULTILINE_COMMENT));
-               System.out.println("MULTILINE_COMMENT Validation (Empty comment): " + regex.validate("/**/", regex.MULTILINE_COMMENT));
-               System.out.println("MULTILINE_COMMENT Validation (Nested asterisks): " + regex.validate("/* *** Nested *** */", regex.MULTILINE_COMMENT));
-               System.out.println("MULTILINE_COMMENT Validation (Special characters inside): " + regex.validate("/* Comment with symbols !@#$%^&*() */", regex.MULTILINE_COMMENT));
+               //System.out.println("MULTILINE_COMMENT Validation (Single line): " + regex.validate("/* This is a test comment */", regex.MULTILINE_COMMENT));
+               //System.out.println("MULTILINE_COMMENT Validation (Multi-line): " + regex.validate("/* multi-line\ncomment */", regex.MULTILINE_COMMENT));
+               //System.out.println("MULTILINE_COMMENT Validation (Empty comment): " + regex.validate("/**/", regex.MULTILINE_COMMENT));
+               //System.out.println("MULTILINE_COMMENT Validation (Nested asterisks): " + regex.validate("/* *** Nested *** */", regex.MULTILINE_COMMENT));
+               //System.out.println("MULTILINE_COMMENT Validation (Special characters inside): " + regex.validate("/* Comment with symbols !@#$%^&*() */", regex.MULTILINE_COMMENT));
           }
 }

@@ -32,7 +32,7 @@ public class RegexTokenizer {
 
     public static List<Token> tokenize(String sourceCode) {
         List<Token> tokens = new ArrayList<>();
-        Matcher matcher = TOKEN_PATTERN.matcher(sourceCode);
+        /*Matcher matcher = TOKEN_PATTERN.matcher(sourceCode);
 
         while (matcher.find()) {
             if (matcher.group(1) != null) {
@@ -59,7 +59,7 @@ public class RegexTokenizer {
                 tokens.add(new Token(TokenType.ASSIGN, matcher.group(11)));
             }
         }
-
+        */
         return tokens;
     }
 }

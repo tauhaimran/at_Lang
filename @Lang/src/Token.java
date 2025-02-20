@@ -1,19 +1,16 @@
-enum TokenType {
-    INT, DEC, BOOL, CHAR, STR, VAR, OPERATOR, WHITESPACE, SCOPE, MULTILINE_COMMENT, ASSIGN, UNKNOWN
-}
-
 public class Token {
-    TokenType type;
-    String value;
+    String lexeme;
+    String type;
+    int lineNumber;
 
-    public Token(TokenType type, String value) {
+    public Token(String lexeme, String type, int lineNumber) {
+        this.lexeme = lexeme;
         this.type = type;
-        this.value = value;
+        this.lineNumber = lineNumber;
     }
 
     @Override
     public String toString() {
-        return String.format("Token[type=%s, value=%s]", type, value);
+        return "Token [lexeme=" + lexeme + ", type=" + type + ", line=" + lineNumber + "]";
     }
 }
-
