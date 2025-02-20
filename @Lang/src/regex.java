@@ -11,7 +11,7 @@ public class regex { //regular expression class
     public static final String CHAR = "'.'";
     public static final String STR = "\"([^\"\\\\]|\\\\.)*\"";  
     public static final String VAR = "[a-z]+";  
-    public static final String DTYPE = "(INT|DEC|BOOL|CHAR|STR)";  
+    //public static final String DTYPE = "(INT|DEC|BOOL|CHAR|STR)";  
 
     // Atomic Expressions (Includes Parentheses)
     public static final String ATOMIC_EXPR = "\\(*(" + INT + "|" + DEC + "|" + VAR + ")\\)*";  
@@ -38,7 +38,7 @@ public class regex { //regular expression class
     public static final Pattern MULTILINE_COMMENT = Pattern.compile("/\\*[\\s\\S]*?\\*/");
 
     // Validation method
-    private static boolean validate(String input, Pattern pattern) {
+    public static boolean validate(String input, Pattern pattern) {
         Matcher matcher = pattern.matcher(input);
         return matcher.matches();
     }
