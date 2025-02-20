@@ -1,4 +1,4 @@
-import java.util.List;
+/*import java.util.List;
 
 public class LexicalAnalyzerTest {
     public static void main(String[] args) {
@@ -21,4 +21,4 @@ public class LexicalAnalyzerTest {
          System.out.println(symbolTable);
     
 }
-}
+}*/

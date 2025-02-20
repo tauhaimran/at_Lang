@@ -1,71 +1,95 @@
-import java.util.*;
-import java.util.regex.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-class LexicalAnalyzer {
-    private static final String INT = "[+-]?[0-9]+";
-    private static final String DEC = "[+-]?[0-9]+\\.[0-9]+";
-    private static final String BOOL = "(true|false|1|0)";
-    private static final String CHAR = "'.'";
-    private static final String STR = "\"([^\"\\\\]|\\\\.)*\"";
-    private static final String VAR = "[a-z]+";
-    private static final String OPERATOR = "[+\\-*/%=]";
-    private static final String WHITESPACE = "\\s+";
-    private static final String MULTILINE_COMMENT = "/\\*[\\s\\S]*?\\*/";
-    private static final String SCOPE = "\\{[^}]*\\}";
-    private static final String ASSIGN = VAR + "@(INT|DEC|BOOL|CHAR|STR)\\s*@\\s*" + "(?:" + INT + "|" + DEC + "|" + BOOL + "|" + CHAR + "|" + STR + "|" + "\\(|\\)|" + OPERATOR + "|" + WHITESPACE + ")+" + ";";
+public class LexicalAnalyzer {
 
-    private static final Pattern TOKEN_PATTERN = Pattern.compile(
-        "(" + INT + ")|" +
-        "(" + DEC + ")|" +
-        "(" + BOOL + ")|" +
-        "(" + CHAR + ")|" +
-        "(" + STR + ")|" +
-        "(" + VAR + ")|" +
-        "(" + OPERATOR + ")|" +
-        "(" + WHITESPACE + ")|" +
-        "(" + MULTILINE_COMMENT + ")|" +
-        "(" + SCOPE + ")|" +
-        "(" + ASSIGN + ")"
-    );
-
-    private final SymbolTable symbolTable = new SymbolTable();
-
-    public List<Token> analyze(String sourceCode) {
-        List<Token> tokens = new ArrayList<>();
-        Matcher matcher = TOKEN_PATTERN.matcher(sourceCode);
-
-        while (matcher.find()) {
-            if (matcher.group(1) != null) {
-                tokens.add(new Token(TokenType.INT, matcher.group(1)));
-            } else if (matcher.group(2) != null) {
-                tokens.add(new Token(TokenType.DEC, matcher.group(2)));
-            } else if (matcher.group(3) != null) {
-                tokens.add(new Token(TokenType.BOOL, matcher.group(3)));
-            } else if (matcher.group(4) != null) {
-                tokens.add(new Token(TokenType.CHAR, matcher.group(4)));
-            } else if (matcher.group(5) != null) {
-                tokens.add(new Token(TokenType.STR, matcher.group(5)));
-            } else if (matcher.group(6) != null) {
-                tokens.add(new Token(TokenType.VAR, matcher.group(6)));
-                symbolTable.add(matcher.group(6), "VAR");
-            } else if (matcher.group(7) != null) {
-                tokens.add(new Token(TokenType.OPERATOR, matcher.group(7)));
-            } else if (matcher.group(8) != null) {
-                tokens.add(new Token(TokenType.WHITESPACE, matcher.group(8)));
-            } else if (matcher.group(9) != null) {
-                tokens.add(new Token(TokenType.MULTILINE_COMMENT, matcher.group(9)));
-            } else if (matcher.group(10) != null) {
-                tokens.add(new Token(TokenType.SCOPE, matcher.group(10)));
-            } else if (matcher.group(11) != null) {
-                tokens.add(new Token(TokenType.ASSIGN, matcher.group(11)));
+    // Method to read the .atlang file and return its content as a String
+    private String readFile(String filePath) {
+        StringBuilder content = new StringBuilder();
+        try (Scanner scanner = new Scanner(new File(filePath))) {
+            while (scanner.hasNextLine()) {
+                content.append(scanner.nextLine()).append("\n");
             }
+        } catch (FileNotFoundException e) {
+            System.err.println("File not found: " + filePath);
+            e.printStackTrace();
+        }
+        return content.toString();
+    }
+
+    // Method to tokenize the input string
+    /*private List<Token> tokenize(String input) {
+        List<Token> tokens = new ArrayList<>();
+        StringBuilder currentToken = new StringBuilder();
+
+        for (int i = 0; i < input.length(); i++) {
+            char currentChar = input.charAt(i);
+
+            // Logic to identify tokens goes here
+            // Example: Check for whitespace, operators, numbers, etc.
+            // For now, we'll just split by whitespace (you'll replace this with your logic)
+            if (Character.isWhitespace(currentChar)) {
+                if (currentToken.length() > 0) {
+                    tokens.add(new Token(TokenType.UNKNOWN, currentToken.toString())); // Replace UNKNOWN with your logic
+                    currentToken.setLength(0); // Reset the current token
+                }
+            } else {
+                currentToken.append(currentChar);
+            }
+        }
+
+        // Add the last token if it exists
+        if (currentToken.length() > 0) {
+            tokens.add(new Token(TokenType.UNKNOWN, currentToken.toString())); // Replace UNKNOWN with your logic
+        }
+
+        return tokens;
+    }*/
+
+    public static List<String> tokenize(String input) {
+        List<String> tokens = new ArrayList<>();
+        
+        // Define regex patterns for major symbols
+        String pattern = "[a-zA-Z_][a-zA-Z0-9_]*|@|\\+|\\-|\\*|\\/|\\^|%|=|;|\\{|\\}|\\(|\\)|'[^']*'|\"[^\"]*\"|\\d+(\\.\\d+)?|true|false";
+
+        // Create the pattern and matcher
+        Pattern r = Pattern.compile(pattern);
+        Matcher m = r.matcher(input);
+        
+        // Find all matches
+        while (m.find()) {
+            tokens.add(m.group());
         }
 
         return tokens;
     }
 
+    // Main method to run the lexer
+    public static void main(String[] args) {
+        LexicalAnalyzer lexer = new LexicalAnalyzer();
+        //String filePath = "input.txt"; // Path to your .atlang file
 
-    public SymbolTable getSymbolTable() {
-        return symbolTable;
+        // Step 1: Read the file
+       // String input = lexer.readFile(filePath);
+        //System.out.println("Input:\n" + input);
+
+        // Step 2: Tokenize the input
+        //List<Token> tokens = lexer.tokenize(testInput.lexer_test_input);
+        List<String> tokens = lexer.tokenize(testInput.lexer_test_input);
+
+        // Step 3: Print the tokens
+        /*System.out.println("\nTokens:");
+        for (Token token : tokens) {
+            System.out.println(token);
+        }*/
+        System.out.println("\nTokens:");
+        for (String token : tokens) {
+            System.out.println(token);
+        }
     }
 }
