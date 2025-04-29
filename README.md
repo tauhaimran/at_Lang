@@ -187,9 +187,269 @@ errorHandler.checkForErrors(sourceCodeWithError);
 
 ---
 
-## License
+Got it! Here’s a section of the README explaining **how the test input for the language looks like** with the actual code, and a detailed explanation of its components:
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+---
+
+## Test Input for the Language
+
+Below is a sample **test input** written in the custom language defined for this assignment. This input demonstrates the syntax for variable declarations, arithmetic operations, comments, and scope management.
+
+### Test Input Code
+
+```java
+// This is a single-line comment
+
+/* 
+   This is a multi-line comment
+   It spans multiple lines
+*/
+
+// Variable declarations and assignments
+x@INT @ 42;
+y@DEC @ 3.14159;
+z@BOOL @ true;
+myChar@CHAR @ 'A';
+myStr@STR @ "Hello";
+myVar@VAR @ myvar;
+
+// Arithmetic operations
+a@INT @ 5 + 3;
+b@DEC @ 4.5 * 2;
+c@DEC @ 2 ^ 3 + 4;
+d@INT @ 10 % 3 + 1;
+e@DEC @ 5.2 / 2;
+
+// Complex expressions with parentheses
+f@INT @ (5 + 3) * 2;
+g@DEC @ ((2.0 + (4.5 * 3.2)) - (1.5 / 2));
+h@DEC @ (2.5 ^ 3.0) + 4.2;
+i@DEC @ ((5.5 / 2) ^ 3) + 1;
+
+// Invalid assignments (should throw errors or fail validation)
+// x@INT @ 5.5 + 3; // Invalid: INT cannot hold a decimal
+// z@BOOL @ 1 + 0;  // Invalid: BOOL cannot hold arithmetic operations
+
+// Scopes
+{
+    x@INT @ 5;
+    y@DEC @ 3.14;
+    z@BOOL @ false;
+}
+
+// Nested scopes
+{
+    x@INT @ (3 + 2);
+    {
+        y@DEC @ 4.2 * 3.1;
+        z@INT @ ((2 + 3) * (4 - 1));
+    }
+}
+```
+
+### Explanation of the Test Input
+
+1. **Single-Line Comments**: 
+   - Anything following `//` is treated as a comment and ignored during compilation.
+   - Example: `// This is a single-line comment`.
+
+2. **Multi-Line Comments**:
+   - These comments can span multiple lines and are enclosed between `/*` and `*/`.
+   - Example:
+     ```java
+     /* 
+        This is a multi-line comment
+        It spans multiple lines
+     */
+     ```
+
+3. **Variable Declarations and Assignments**:
+   - Variables are declared with the format: `<variableName>@<dataType> @ <value>;`.
+   - Supported data types include:
+     - `INT`: Integer (whole numbers).
+     - `DEC`: Decimal (floating-point numbers).
+     - `BOOL`: Boolean (true/false).
+     - `CHAR`: Character (single letter, e.g., `'A'`).
+     - `STR`: String (text).
+     - `VAR`: Variable (which can be assigned another variable's value).
+   - Example:
+     - `x@INT @ 42;` declares an integer variable `x` and assigns it the value 42.
+     - `y@DEC @ 3.14159;` declares a decimal variable `y` and assigns it the value 3.14159.
+     - `myChar@CHAR @ 'A';` declares a character variable `myChar` with the value `'A'`.
+     - `myStr@STR @ "Hello";` declares a string variable `myStr` with the value `"Hello"`.
+     - `myVar@VAR @ myvar;` assigns the value of another variable `myvar` to `myVar`.
+
+4. **Arithmetic Operations**:
+   - The language supports basic arithmetic operations:
+     - Addition (`+`), Subtraction (`-`), Multiplication (`*`), Division (`/`), Modulus (`%`), and Exponentiation (`^`).
+   - Example:
+     - `a@INT @ 5 + 3;` assigns the result of `5 + 3` (which is 8) to the integer variable `a`.
+     - `b@DEC @ 4.5 * 2;` assigns the result of `4.5 * 2` (which is 9.0) to the decimal variable `b`.
+     - `c@DEC @ 2 ^ 3 + 4;` assigns the result of `2^3 + 4` (which is 12) to the decimal variable `c`.
+     - `d@INT @ 10 % 3 + 1;` assigns the result of `10 % 3 + 1` (which is 2) to the integer variable `d`.
+     - `e@DEC @ 5.2 / 2;` assigns the result of `5.2 / 2` (which is 2.6) to the decimal variable `e`.
+
+5. **Complex Expressions**:
+   - Parentheses are used to enforce precedence in complex expressions.
+   - Example:
+     - `f@INT @ (5 + 3) * 2;` calculates `(5 + 3)` first, which is `8`, then multiplies it by `2`, resulting in `16`.
+     - `g@DEC @ ((2.0 + (4.5 * 3.2)) - (1.5 / 2));` calculates nested operations by following standard arithmetic rules.
+     - `h@DEC @ (2.5 ^ 3.0) + 4.2;` computes `2.5^3.0` and then adds `4.2`.
+     - `i@DEC @ ((5.5 / 2) ^ 3) + 1;` divides `5.5` by `2`, raises the result to the power of `3`, then adds `1`.
+
+6. **Invalid Assignments**:
+   - The lexer should flag errors for invalid operations such as:
+     - Assigning a decimal number to an integer (`x@INT @ 5.5 + 3;`).
+     - Performing arithmetic operations on a boolean value (`z@BOOL @ 1 + 0;`).
+   - These lines are commented out to show the expected errors, but they demonstrate situations where type mismatches should occur.
+
+7. **Scopes**:
+   - The language supports variable declarations within **scopes**, defined by curly braces `{}`.
+   - Example:
+     - Within the block, `x`, `y`, and `z` are local variables with their own values.
+   - Nested scopes are also allowed, as seen in the nested block where `y` and `z` are declared inside another block.
+
+8. **Nested Scopes**:
+   - The language allows **nested scopes**, where variables can be declared inside other blocks.
+   - Example:
+     - The outer block declares `x`, and inside the block, a nested block declares `y` and `z`. These variables are scoped locally to their respective blocks.
+
+---
+
+This test input showcases the basic syntax and structure of the language, including valid and invalid scenarios, to test the functionality of the lexer, error handler, and symbol table. It demonstrates the compiler's ability to process comments, variables, arithmetic, and complex expressions, as well as handle scope management and errors.
+
+---
+
+Let me know if you need further elaboration or changes!Got it! Here’s a section of the README explaining **how the test input for the language looks like** with the actual code, and a detailed explanation of its components:
+
+---
+
+## Test Input for the Language
+
+Below is a sample **test input** written in the custom language defined for this assignment. This input demonstrates the syntax for variable declarations, arithmetic operations, comments, and scope management.
+
+### Test Input Code
+
+```java
+// This is a single-line comment
+
+/* 
+   This is a multi-line comment
+   It spans multiple lines
+*/
+
+// Variable declarations and assignments
+x@INT @ 42;
+y@DEC @ 3.14159;
+z@BOOL @ true;
+myChar@CHAR @ 'A';
+myStr@STR @ "Hello";
+myVar@VAR @ myvar;
+
+// Arithmetic operations
+a@INT @ 5 + 3;
+b@DEC @ 4.5 * 2;
+c@DEC @ 2 ^ 3 + 4;
+d@INT @ 10 % 3 + 1;
+e@DEC @ 5.2 / 2;
+
+// Complex expressions with parentheses
+f@INT @ (5 + 3) * 2;
+g@DEC @ ((2.0 + (4.5 * 3.2)) - (1.5 / 2));
+h@DEC @ (2.5 ^ 3.0) + 4.2;
+i@DEC @ ((5.5 / 2) ^ 3) + 1;
+
+// Invalid assignments (should throw errors or fail validation)
+// x@INT @ 5.5 + 3; // Invalid: INT cannot hold a decimal
+// z@BOOL @ 1 + 0;  // Invalid: BOOL cannot hold arithmetic operations
+
+// Scopes
+{
+    x@INT @ 5;
+    y@DEC @ 3.14;
+    z@BOOL @ false;
+}
+
+// Nested scopes
+{
+    x@INT @ (3 + 2);
+    {
+        y@DEC @ 4.2 * 3.1;
+        z@INT @ ((2 + 3) * (4 - 1));
+    }
+}
+```
+
+### Explanation of the Test Input
+
+1. **Single-Line Comments**: 
+   - Anything following `//` is treated as a comment and ignored during compilation.
+   - Example: `// This is a single-line comment`.
+
+2. **Multi-Line Comments**:
+   - These comments can span multiple lines and are enclosed between `/*` and `*/`.
+   - Example:
+     ```java
+     /* 
+        This is a multi-line comment
+        It spans multiple lines
+     */
+     ```
+
+3. **Variable Declarations and Assignments**:
+   - Variables are declared with the format: `<variableName>@<dataType> @ <value>;`.
+   - Supported data types include:
+     - `INT`: Integer (whole numbers).
+     - `DEC`: Decimal (floating-point numbers).
+     - `BOOL`: Boolean (true/false).
+     - `CHAR`: Character (single letter, e.g., `'A'`).
+     - `STR`: String (text).
+     - `VAR`: Variable (which can be assigned another variable's value).
+   - Example:
+     - `x@INT @ 42;` declares an integer variable `x` and assigns it the value 42.
+     - `y@DEC @ 3.14159;` declares a decimal variable `y` and assigns it the value 3.14159.
+     - `myChar@CHAR @ 'A';` declares a character variable `myChar` with the value `'A'`.
+     - `myStr@STR @ "Hello";` declares a string variable `myStr` with the value `"Hello"`.
+     - `myVar@VAR @ myvar;` assigns the value of another variable `myvar` to `myVar`.
+
+4. **Arithmetic Operations**:
+   - The language supports basic arithmetic operations:
+     - Addition (`+`), Subtraction (`-`), Multiplication (`*`), Division (`/`), Modulus (`%`), and Exponentiation (`^`).
+   - Example:
+     - `a@INT @ 5 + 3;` assigns the result of `5 + 3` (which is 8) to the integer variable `a`.
+     - `b@DEC @ 4.5 * 2;` assigns the result of `4.5 * 2` (which is 9.0) to the decimal variable `b`.
+     - `c@DEC @ 2 ^ 3 + 4;` assigns the result of `2^3 + 4` (which is 12) to the decimal variable `c`.
+     - `d@INT @ 10 % 3 + 1;` assigns the result of `10 % 3 + 1` (which is 2) to the integer variable `d`.
+     - `e@DEC @ 5.2 / 2;` assigns the result of `5.2 / 2` (which is 2.6) to the decimal variable `e`.
+
+5. **Complex Expressions**:
+   - Parentheses are used to enforce precedence in complex expressions.
+   - Example:
+     - `f@INT @ (5 + 3) * 2;` calculates `(5 + 3)` first, which is `8`, then multiplies it by `2`, resulting in `16`.
+     - `g@DEC @ ((2.0 + (4.5 * 3.2)) - (1.5 / 2));` calculates nested operations by following standard arithmetic rules.
+     - `h@DEC @ (2.5 ^ 3.0) + 4.2;` computes `2.5^3.0` and then adds `4.2`.
+     - `i@DEC @ ((5.5 / 2) ^ 3) + 1;` divides `5.5` by `2`, raises the result to the power of `3`, then adds `1`.
+
+6. **Invalid Assignments**:
+   - The lexer should flag errors for invalid operations such as:
+     - Assigning a decimal number to an integer (`x@INT @ 5.5 + 3;`).
+     - Performing arithmetic operations on a boolean value (`z@BOOL @ 1 + 0;`).
+   - These lines are commented out to show the expected errors, but they demonstrate situations where type mismatches should occur.
+
+7. **Scopes**:
+   - The language supports variable declarations within **scopes**, defined by curly braces `{}`.
+   - Example:
+     - Within the block, `x`, `y`, and `z` are local variables with their own values.
+   - Nested scopes are also allowed, as seen in the nested block where `y` and `z` are declared inside another block.
+
+8. **Nested Scopes**:
+   - The language allows **nested scopes**, where variables can be declared inside other blocks.
+   - Example:
+     - The outer block declares `x`, and inside the block, a nested block declares `y` and `z`. These variables are scoped locally to their respective blocks.
+
+---
+
+This test input showcases the basic syntax and structure of the language, including valid and invalid scenarios, to test the functionality of the lexer, error handler, and symbol table. It demonstrates the compiler's ability to process comments, variables, arithmetic, and complex expressions, as well as handle scope management and errors.
 
 ---
 
